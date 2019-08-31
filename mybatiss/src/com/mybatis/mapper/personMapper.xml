@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.PersonMapper">
+	<!-- 查询一个 -->
+	 <select id="queryPersonByusername" resultMap="personResult" parameterType="String">
+	 	select * from login where username = ${value}
+	 </select>
+	
+	<resultMap type="person" id="personResult">
+		<id property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="sex" column="sex" javaType="boolean" jdbcType="INTEGER"/>
+		
+	</resultMap>
+	
+	 <select id="queryPersonOrderBycolumn" resultType="Person" parameterType="String">
+	 	select * from login order by ${value} desc
+	 </select>
+	 
+	  <select id="queryPersonWithHashmap" resultType="Person" parameterType="HashMap">
+	 	select * from login where username = #{username}
+	 </select>
+	 
+	<!-- 查询多个 -->
+	 <select id="queryPersonAll" resultType="Person" >
+	 	select * from login
+	 </select>
+	 
+	 <insert id="insertPerson" parameterType="Person">
+	 	insert into login(username,password,sex,id) values(#{username},#{password},#{sex},#{id})
+	 </insert>
+	
+	 <update id="updatePersonByusername" parameterType="Person">
+	 update login set username = #{username},password = #{password} where username = #{username}
+	 </update>
+	
+	 <delete id="delectPersonByusername" parameterType="String" >
+	 	delete from login where username = #{username}
+	 </delete>
+	 
+	 <!-- 调用存储过程实现查询，statementType="CALLBLE" 
+	 	 存储过程的输入参数，在mybatis中用Map来传递（HashMap）	
+	 -->
+	 <select id="queryCountBySexWithPro"  statementType="CALLABLE" parameterType="HashMap">
+	 	{ CALL queryCountBySexWithPro ( #{password,jdbcType=VARCHAR,mode=IN}, #{scount,jdbcType=INTEGER,mode=OUT} ) }
+	 </select>
+</mapper>
