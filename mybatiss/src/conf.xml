@@ -4,11 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="db.properties">
-<<<<<<< HEAD
-	<!-- aaaa -->
-=======
-	<!-- bbb -->
->>>>>>> branch 'master' of https://github.com/huangyimign/ecplisegitremove.git
+	<!-- aaaa+bbb -->
 	</properties>
 	<!-- 定义别名 -->
 	<typeAliases>
