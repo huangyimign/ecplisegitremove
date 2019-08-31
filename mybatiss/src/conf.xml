@@ -4,7 +4,7 @@
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<properties resource="db.properties">
-		
+	<!-- bbb -->
 	</properties>
 	<!-- 定义别名 -->
 	<typeAliases>
